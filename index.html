@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Planilla Conteo Cajas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="page">
+    <div class="wrap">
+
+      <!-- TAB 1 -->
+      <section class="card" id="tab1">
+        <div class="cardHeader">
+          <div>
+            <div class="title">1) Cargar</div>
+            <div class="hint">Legajo (3 dígitos) + 2 códigos (hasta 4 caracteres). Mantiene 0 adelante (ej: 066).</div>
+          </div>
+          <div class="pill" id="statusPill">Sin datos</div>
+        </div>
+
+        <div class="cardBody">
+          <div class="grid">
+            <div class="bigInputsRow">
+              <div class="bigField">
+                <label for="legajo">Legajo</label>
+                <input id="legajo" class="legajoInput" inputmode="numeric" type="tel" maxlength="3" placeholder="000" />
+              </div>
+
+              <div class="bigField">
+                <label for="cod1">Código 1</label>
+                <input id="cod1" class="codeInput" type="text" maxlength="4" placeholder="0000" autocomplete="off" />
+              </div>
+
+              <div class="bigField">
+                <label for="cod2">Código 2</label>
+                <input id="cod2" class="codeInput" type="text" maxlength="4" placeholder="0000" autocomplete="off" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn secondary" id="limpiarBtn" type="button">Limpiar</button>
+              <button class="btn" id="siguienteBtn" type="button">Siguiente</button>
+            </div>
+
+            <div class="msg" id="msg1"></div>
+            <div class="msg" id="msg1b"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2 -->
+      <section id="tab2" style="display:none;">
+        <div class="backBar">
+          <button class="backBtn" id="volverBtn" type="button" aria-label="Volver">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="backText">
+            <div class="t1">2) Completar</div>
+            <div class="t2" id="legajoLine">Legajo: —</div>
+          </div>
+          <div style="margin-left:auto" class="pill" id="countPill">0 filas</div>
+        </div>
+
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="colSector">Sector</th>
+                <th class="colCod">Cod</th>
+                <th class="colPilas">Pilas</th>
+                <th class="colCxp">Cjas<br>x Pila</th>
+                <th class="colSueltas">Cjas<br>Sueltas</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="actions" style="margin-top:10px;">
+          <button class="btn secondary" id="resetFillsBtn" type="button">Reset</button>
+          <!-- CAMBIO: ya NO envía a Google -->
+          <button class="btn" id="irPaso3Btn" type="button">Siguiente</button>
+        </div>
+        <div class="msg" id="msgSend"></div>
+      </section>
+
+      <!-- TAB 3 -->
+      <section id="tab3" style="display:none;">
+        <div class="backBar">
+          <button class="backBtn" id="volverBtn3" type="button" aria-label="Volver">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="backText">
+            <div class="t1">3) Cajas por Código</div>
+            <div class="t2" id="legajoLine3">Legajo: —</div>
+          </div>
+          <div style="margin-left:auto" class="pill" id="countPill3">0 códigos</div>
+        </div>
+
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="colCod3">Cod</th>
+                <th class="colPA">Pickings<br>Armados</th>
+                <th class="colPFC">Pedidos<br>para FC</th>
+                <th class="colMT">Mercadería<br>en Tránsito</th>
+              </tr>
+            </thead>
+            <tbody id="tbody3"></tbody>
+          </table>
+        </div>
+
+        <div class="actions" style="margin-top:10px;">
+          <button class="btn secondary" id="reset3Btn" type="button">Reset</button>
+          <!-- ENVIAR FINAL: manda todo junto -->
+          <button class="btn" id="enviarFinalBtn" type="button">Enviar</button>
+        </div>
+        <div class="msg" id="msg3"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Overlay cargando -->
+  <div class="overlay" id="overlay">
+    <div class="overlayCard">
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="overlayText">
+        <div class="t1" id="overlayTitle">Enviando…</div>
+        <div class="t2" id="overlaySub">Guardando en Google Sheet</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="planimetria.js"></script>
+</body>
+</html>
